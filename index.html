@@ -1,0 +1,1487 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Haya Al Ajami — Birthday Mission (10) 👑😈</title>
+    <style>
+        :root {
+            --bg1: #070710;
+            --bg2: #120a1f;
+            --bg3: #2a0d3b;
+            --glass: rgba(255, 255, 255, .08);
+            --line: rgba(255, 255, 255, .14);
+            --txt: #fbf7ff;
+            --muted: rgba(255, 255, 255, .74);
+            --pink: #ff3fa6;
+            --pink2: #ff1b87;
+            --violet: #b66bff;
+            --blue: #69d5ff;
+            --gold: #ffd36b;
+            --shadow: 0 26px 90px rgba(0, 0, 0, .58);
+            --r: 22px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--txt);
+            font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+            background:
+                radial-gradient(900px 520px at 18% 14%, rgba(255, 63, 166, .20), transparent 62%),
+                radial-gradient(900px 540px at 82% 22%, rgba(105, 213, 255, .16), transparent 60%),
+                radial-gradient(900px 560px at 55% 92%, rgba(255, 211, 107, .12), transparent 62%),
+                linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+            overflow-x: hidden;
+            padding: 18px;
+        }
+
+        .wrap {
+            width: min(1280px, 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        @media(max-width:980px) {
+            .wrap {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            position: relative;
+        }
+
+        .topbar {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, .12);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 1000;
+            letter-spacing: .2px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), #ffe7a5);
+            box-shadow: 0 0 18px rgba(255, 211, 107, .35);
+        }
+
+        .pill {
+            font-size: 12px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 63, 166, .14);
+            border: 1px solid rgba(255, 63, 166, .30);
+            color: #ffe3f1;
+            font-weight: 1000;
+            user-select: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform .12s ease, filter .12s ease;
+            white-space: nowrap;
+        }
+
+        .pill:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.06)
+        }
+
+        .pill:active {
+            transform: translateY(1px)
+        }
+
+        .mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-weight: 900
+        }
+
+        .stageWrap {
+            padding: 14px;
+        }
+
+        canvas#stage {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/5;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, .14);
+            background:
+                radial-gradient(650px 520px at 50% 18%, rgba(255, 255, 255, .12), transparent 60%),
+                rgba(255, 255, 255, .05);
+            box-shadow: 0 22px 70px rgba(0, 0, 0, .45);
+            display: block;
+            touch-action: none;
+        }
+
+        #fx {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 60;
+        }
+
+        .panel {
+            padding: 14px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .block {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 18px;
+            padding: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scan {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(to bottom,
+                    rgba(255, 255, 255, .05) 0px,
+                    rgba(255, 255, 255, .05) 1px,
+                    transparent 5px,
+                    transparent 10px);
+            opacity: .20;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        .titleRow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .title {
+            font-weight: 1000;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .small {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .hint {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.85
+        }
+
+        .btnRow {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .btn {
+            border: 0;
+            cursor: pointer;
+            padding: 12px 14px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--pink), var(--pink2));
+            color: white;
+            font-weight: 1000;
+            font-size: 14px;
+            box-shadow: 0 14px 28px rgba(255, 63, 166, .18);
+            transition: transform .12s ease, filter .12s ease, opacity .12s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.06)
+        }
+
+        .btn:active {
+            transform: translateY(1px)
+        }
+
+        .btn.secondary {
+            background: rgba(255, 255, 255, .10);
+            border: 1px solid rgba(255, 255, 255, .16);
+            box-shadow: none;
+        }
+
+        .btn.gold {
+            background: linear-gradient(135deg, var(--gold), #ffb84d);
+            color: #2b1b00;
+            box-shadow: 0 14px 28px rgba(255, 211, 107, .18);
+        }
+
+        .btn.locked {
+            opacity: .55;
+            pointer-events: none;
+            filter: saturate(.35)
+        }
+
+        .chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .chip {
+            cursor: pointer;
+            padding: 8px 10px;
+            border-radius: 999px;
+            background: rgba(105, 213, 255, .12);
+            border: 1px solid rgba(105, 213, 255, .25);
+            color: #e7f7ff;
+            font-weight: 900;
+            font-size: 12px;
+            user-select: none;
+            transition: .12s ease;
+        }
+
+        .chip.active {
+            background: rgba(105, 213, 255, .22);
+            border-color: rgba(105, 213, 255, .45);
+            transform: translateY(-1px);
+        }
+
+        .swatches {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .swatch {
+            height: 34px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, .18);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swatch.selected:after {
+            content: "✓";
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 1000;
+            color: white;
+            text-shadow: 0 6px 18px rgba(0, 0, 0, .45);
+            background: rgba(0, 0, 0, .18);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(0, 0, 0, .58);
+            border: 1px solid rgba(255, 255, 255, .16);
+            color: white;
+            padding: 10px 12px;
+            border-radius: 14px;
+            font-size: 13px;
+            opacity: 0;
+            transition: opacity .2s ease, transform .2s ease;
+            z-index: 70;
+            backdrop-filter: blur(10px);
+            max-width: min(92vw, 760px);
+            text-align: center;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0)
+        }
+
+        .progress {
+            height: 10px;
+            background: rgba(255, 255, 255, .10);
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--pink), var(--violet), var(--blue));
+            border-radius: 999px;
+            transition: width .25s ease;
+        }
+
+        .badge {
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255, 211, 107, .14);
+            border: 1px solid rgba(255, 211, 107, .28);
+            color: #ffe7b7;
+            font-weight: 1000;
+            white-space: nowrap;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            place-items: center;
+            background: rgba(0, 0, 0, .64);
+            z-index: 9999;
+            padding: 18px;
+        }
+
+        .modal.show {
+            display: grid
+        }
+
+        .modalCard {
+            width: min(760px, 100%);
+            background: rgba(12, 12, 22, .92);
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 22px;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, .70);
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            position: relative;
+        }
+
+        .modalHead {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, .10);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            font-weight: 1000;
+        }
+
+        .x {
+            cursor: pointer;
+            font-size: 18px;
+            opacity: .85
+        }
+
+        .modalBody {
+            padding: 16px;
+            display: grid;
+            gap: 12px
+        }
+
+        input.code {
+            width: 100%;
+            padding: 14px 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, .16);
+            background: rgba(255, 255, 255, .08);
+            color: white;
+            font-size: 16px;
+            font-weight: 900;
+            outline: none;
+        }
+
+        .secretBox {
+            padding: 14px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 211, 107, .22);
+            background: rgba(255, 211, 107, .08);
+            color: #fff5dc;
+            line-height: 1.9;
+            font-weight: 800;
+            white-space: pre-wrap;
+        }
+
+        .dividerLine {
+            height: 1px;
+            background: rgba(255, 255, 255, .12);
+            margin: 4px 0;
+        }
+
+        /* Video panel */
+        .videoBox {
+            border: 1px solid rgba(255, 255, 255, .14);
+            background: rgba(255, 255, 255, .06);
+            border-radius: 18px;
+            padding: 12px;
+            display: none;
+            gap: 10px;
+        }
+
+        .videoBox.show {
+            display: grid
+        }
+
+        .videoNote {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.7
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="fx"></canvas>
+    <div class="toast" id="toast">يا هيا… جاهزة للمهمة؟ 😈👑</div>
+
+    <div class="wrap">
+        <!-- LEFT: Studio -->
+        <div class="card">
+            <div class="topbar">
+                <div class="brand"><span class="dot"></span> Birthday Designer Mission — Haya (10)</div>
+                <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
+                    <div class="pill" id="musicBtn">🎧 MUSIC: OFF</div>
+                    <div class="pill" id="copyBtn">🔗 COPY LINK</div>
+                </div>
+            </div>
+            <div class="stageWrap">
+                <canvas id="stage" width="900" height="1125"></canvas>
+            </div>
+        </div>
+
+        <!-- RIGHT: Mission -->
+        <div class="card">
+            <div class="topbar">
+                <div class="brand"><span class="dot"></span> تعليمات هيا الأسطورية 💎</div>
+                <div class="pill" id="resetBtn">♻️ RESET</div>
+            </div>
+
+            <div class="panel">
+                <div class="block">
+                    <div class="scan"></div>
+                    <div class="titleRow">
+                        <h3 class="title"><span id="fullNameLabel"></span> ✨</h3>
+                        <span class="badge mono" id="missionId">HX-0000</span>
+                    </div>
+                    <p class="hint" id="introText"></p>
+                    <div class="progress">
+                        <div class="bar" id="bar"></div>
+                    </div>
+
+                    <div class="btnRow">
+                        <button class="btn secondary locked" id="vaultBtn" title="بيتفتح بعد ما تكملي الشروط">🔒 الخزنة
+                            السرّية</button>
+                        <button class="btn gold" id="saveBtn">📸 Save Design (PNG)</button>
+                    </div>
+
+                    <div class="dividerLine"></div>
+
+                    <div class="videoBox" id="afterUnlockBox">
+                        <div class="titleRow">
+                            <div class="title">🎉 المرحلة التانية (بعد المعايدة)</div>
+                            <span class="badge">BONUS</span>
+                        </div>
+                        <div class="videoNote">
+                            هلق بعد ما شفتِ الرسالة… في مفاجأة كمان:
+                            يا بتفتحي <b>فيديو مني</b> 🎥
+                            أو بتكبسي <b>واتساب</b> وبنحكي فيديو 😉
+                        </div>
+                        <div class="btnRow">
+                            <button class="btn" id="openVideoBtn">🎥 افتحي فيديو مني</button>
+                            <button class="btn secondary" id="waBtn">📱 افتحي واتساب لحتى ندق فيديو</button>
+                        </div>
+                        <div class="videoNote" id="waNote" style="display:none"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="titleRow">
+                        <h3 class="title">1) اختاري المود</h3>
+                        <span class="small">Princess ولا Kuromi؟</span>
+                    </div>
+                    <div class="chips" id="modeChips"></div>
+                    <p class="hint">المود بيغير الجو والستايل… جربي الاتنين 😈👑</p>
+                </div>
+
+                <div class="block">
+                    <div class="titleRow">
+                        <h3 class="title">2) اختاري اللبس</h3>
+                        <span class="small">ستايل القطعة</span>
+                    </div>
+                    <div class="chips" id="garmentChips"></div>
+                </div>
+
+                <div class="block">
+                    <div class="titleRow">
+                        <h3 class="title">3) الأقمشة</h3>
+                        <span class="small">اضغطي لتطبيق</span>
+                    </div>
+                    <div class="swatches" id="swatches"></div>
+                    <p class="hint">Tip: “Sparkle” بيعطي لمعة خرافية ✨</p>
+                </div>
+
+                <div class="block">
+                    <div class="titleRow">
+                        <h3 class="title">4) ستكرز</h3>
+                        <span class="small">حطي 3 عالأقل</span>
+                    </div>
+                    <div class="btnRow">
+                        <button class="btn secondary" data-stk="🎀">🎀</button>
+                        <button class="btn secondary" data-stk="💖">💖</button>
+                        <button class="btn secondary" data-stk="⭐">⭐</button>
+                        <button class="btn secondary" data-stk="✨">✨</button>
+                        <button class="btn secondary" data-stk="👑">👑</button>
+                        <button class="btn secondary" data-stk="🦋">🦋</button>
+                        <button class="btn secondary" data-stk="🌙">🌙</button>
+                        <button class="btn secondary" data-stk="🖤">🖤</button>
+                    </div>
+                    <p class="hint">اسحبي الستكر لمكانه… دبل كليك بينحذف.</p>
+
+                    <div class="btnRow" style="margin-top:12px;">
+                        <button class="btn secondary" id="skinBtn">👩‍🎨 Skin</button>
+                        <button class="btn secondary" id="hairBtn">💇 Hair</button>
+                        <button class="btn secondary" id="sparkBtn">🎆 Spark</button>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="titleRow">
+                        <h3 class="title">قوانين المهمة 😈</h3>
+                        <span class="small mono" id="rulesChip">LOCKED</span>
+                    </div>
+                    <p class="hint" id="rulesText">
+                        الخزنة ما بتنفتح إلا إذا:
+                        <br>1) تختاري مود ✅
+                        <br>2) تحطي 3 ستكرز عالأقل ✅
+                        <br>3) تعملي Save PNG ✅
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VAULT MODAL -->
+    <div class="modal" id="modal">
+        <div class="modalCard">
+            <div class="modalHead">
+                <span>🔒 الخزنة السرّية — لهيا العجمي</span>
+                <span class="x" id="closeModal">✕</span>
+            </div>
+            <div class="modalBody">
+                <div class="small">اكتبي الكود اللي مع أخوك (على ورقة صغيرة) 👀</div>
+                <input class="code mono" id="codeInput" placeholder="مثال: HAYA-10-KUROMI" />
+                <div class="btnRow">
+                    <button class="btn" id="checkBtn">✅ فتح الخزنة</button>
+                    <button class="btn secondary" id="hintBtn">💡 Hint</button>
+                </div>
+                <div class="secretBox" id="secretBox" style="display:none"></div>
+                <div class="btnRow" id="openGiftRow" style="display:none">
+                    <button class="btn gold" id="openGiftBtn">🎁 هلق صار مسموح تفتحي الهدية</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* =========================
+           PERSONALIZE HERE
+        ========================= */
+        const FULL_NAME = "Haya Al Ajami";
+        const SECRET_CODE = "HAYA-10-KUROMI"; // حط الكود يلي رح يكتبه أخوك بورقة
+        const VIDEO_URL = "";              // رابط فيديوك (YouTube unlisted أو mp4 مستضاف)
+        const WHATSAPP_NUMBER = "";          // رقمك دولي بدون + (مثال: 9639xxxxxxx)
+
+        const SECRET_MESSAGE =
+            `يا هيا العجمي… كل سنة وإنتِ بخير يا أحلى أميرة 😭👑
+
+بعرف إني بعيد… بس اليوم عملتلك لعبة/مهمة مخصوصة لإلك:
+إنتِ المصمّمة الرسمية للقصر 😈💖
+
+شو بدي منك؟
+1) صمّمي أجمل طقم (Princess أو Kuromi)
+2) احفظيه PNG
+3) وبعتيلي التصميم… بدي شوف ذوقك الخرافي 🔥
+
+أنا كتير فخور فيكي…
+وبتمنالك سنة الـ10 تكون أحلى سنة بحياتك 💎✨
+
+محبتك/أخوك 🖤`;
+
+        /* =========================
+           Link mission id
+        ========================= */
+        const params = new URLSearchParams(location.search);
+        const MID = (params.get("mid") || ("HX-" + Math.floor(1000 + Math.random() * 9000)));
+        document.getElementById("missionId").textContent = MID;
+        document.getElementById("fullNameLabel").textContent = FULL_NAME;
+        document.getElementById("introText").innerHTML =
+            `يا <b>${FULL_NAME}</b>… قبل ما تفتحي الهدية 🎁
+  لازم تكمّلي <b>مهمة المصمّمة</b> 😈👑
+  <br>آخر شي رح تفتحي الخزنة بالكود… وبعدين في مفاجأة تانية.`;
+
+        // copy link
+        document.getElementById("copyBtn").addEventListener("click", async () => {
+            const url = new URL(location.href);
+            url.searchParams.set("mid", MID);
+            try { await navigator.clipboard.writeText(url.toString()); toast("✅ نسخت الرابط!"); }
+            catch (e) { prompt("Copy link:", url.toString()); }
+        });
+
+        // toast
+        const toastEl = document.getElementById("toast");
+        function toast(msg) {
+            toastEl.textContent = msg;
+            toastEl.classList.add("show");
+            setTimeout(() => toastEl.classList.remove("show"), 1800);
+        }
+        setTimeout(() => toast("اختاري مود… وحطي 3 ستكرز… وبعدين Save 😈"), 550);
+
+        /* =========================
+           Audio + Music (procedural)
+        ========================= */
+        let audioCtx, musicOn = false, musicTimer = null;
+        function ensureAudio() {
+            audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === "suspended") audioCtx.resume();
+        }
+        function beep(freq = 880, dur = 0.06, type = "sine", gain = 0.03) {
+            ensureAudio();
+            const o = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            o.type = type; o.frequency.value = freq;
+            g.gain.value = gain;
+            o.connect(g); g.connect(audioCtx.destination);
+            o.start(); o.stop(audioCtx.currentTime + dur);
+        }
+        function startMusic() {
+            ensureAudio();
+            const seq = [
+                [440, 0.07], [660, 0.07], [587, 0.07], [784, 0.09],
+                [494, 0.07], [740, 0.07], [659, 0.07], [988, 0.10],
+            ];
+            let i = 0;
+            musicTimer = setInterval(() => {
+                const [f, d] = seq[i++ % seq.length];
+                beep(f, d, "triangle", 0.014);
+            }, 180);
+        }
+        function stopMusic() {
+            if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+        }
+        const musicBtn = document.getElementById("musicBtn");
+        musicBtn.addEventListener("click", () => {
+            musicOn = !musicOn;
+            musicBtn.textContent = "🎧 MUSIC: " + (musicOn ? "ON" : "OFF");
+            if (musicOn) { startMusic(); toast("🎧 شغّلنا موسيقى خفيفة"); }
+            else { stopMusic(); toast("🔇 سكّرنا الموسيقى"); }
+        });
+
+        /* =========================
+           FX fireworks
+        ========================= */
+        const fx = document.getElementById("fx");
+        const fctx = fx.getContext("2d");
+        function resizeFx() {
+            fx.width = innerWidth * devicePixelRatio;
+            fx.height = innerHeight * devicePixelRatio;
+            fctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        }
+        addEventListener("resize", resizeFx);
+        resizeFx();
+
+        let particles = [], running = false;
+        function firework() {
+            const cx = 120 + Math.random() * (innerWidth - 240);
+            const cy = 120 + Math.random() * 280;
+            for (let i = 0; i < 160; i++) {
+                const ang = Math.random() * Math.PI * 2;
+                const sp = 1.8 + Math.random() * 4.8;
+                particles.push({
+                    x: cx, y: cy,
+                    vx: Math.cos(ang) * sp,
+                    vy: Math.sin(ang) * sp,
+                    a: Math.random() * Math.PI * 2,
+                    va: -0.2 + Math.random() * 0.4,
+                    r: 2 + Math.random() * 4,
+                    life: 0,
+                    max: 90 + Math.random() * 70
+                });
+            }
+            animateFx();
+        }
+        function sparkleFx() {
+            const cx = innerWidth * 0.5, cy = innerHeight * 0.84;
+            for (let i = 0; i < 60; i++) {
+                particles.push({
+                    x: cx + (-40 + Math.random() * 80),
+                    y: cy + (-40 + Math.random() * 80),
+                    vx: -2 + Math.random() * 4,
+                    vy: -7 + Math.random() * -2,
+                    a: Math.random() * Math.PI * 2,
+                    va: -0.2 + Math.random() * 0.4,
+                    r: 2 + Math.random() * 4,
+                    life: 0,
+                    max: 70 + Math.random() * 45
+                });
+            }
+            animateFx();
+        }
+        function animateFx() {
+            if (running) return;
+            running = true;
+            function frame() {
+                fctx.clearRect(0, 0, innerWidth, innerHeight);
+                particles.forEach(p => {
+                    p.life++;
+                    p.x += p.vx; p.y += p.vy;
+                    p.a += p.va;
+                    p.vy += 0.04;
+                    const t = 1 - (p.life / p.max);
+                    fctx.save();
+                    fctx.translate(p.x, p.y);
+                    fctx.rotate(p.a);
+                    const hue = (p.x / innerWidth) * 360;
+                    fctx.fillStyle = `hsla(${hue}, 95%, 60%, ${Math.max(0, t)})`;
+                    fctx.fillRect(-p.r, -p.r, p.r * 2.2, p.r * 1.2);
+                    fctx.restore();
+                });
+                particles = particles.filter(p => p.life < p.max);
+                if (particles.length) requestAnimationFrame(frame);
+                else { running = false; fctx.clearRect(0, 0, innerWidth, innerHeight); }
+            }
+            requestAnimationFrame(frame);
+        }
+
+        /* =========================
+           Canvas Studio
+        ========================= */
+        const canvas = document.getElementById("stage");
+        const ctx = canvas.getContext("2d");
+
+        const MODES = [
+            { key: "princess", label: "👑 Princess", accent: "#ffd36b" },
+            { key: "kuromi", label: "😈 Kuromi", accent: "#ff3fa6" }
+        ];
+
+        const fabrics = [
+            { name: "Royal Gold", type: "solid", c: "#ffd36b" },
+            { name: "Pink Satin", type: "solid", c: "#ff3fa6" },
+            { name: "Violet", type: "solid", c: "#b66bff" },
+            { name: "Sky", type: "solid", c: "#69d5ff" },
+            { name: "Midnight", type: "solid", c: "#1c1c2f" },
+            { name: "Mint", type: "solid", c: "#7dffcf" },
+            { name: "Sparkle", type: "sparkle", c: "#ffffff" },
+            { name: "Polka", type: "polka", c: "#ff3fa6" },
+            { name: "Stars", type: "stars", c: "#69d5ff" },
+            { name: "Hearts", type: "hearts", c: "#ff3fa6" },
+            { name: "Stripes", type: "stripes", c: "#ffd36b" },
+            { name: "Denim", type: "denim", c: "#3b74ff" },
+        ];
+
+        const garments = [
+            { key: "dress", label: "👗 Dress" },
+            { key: "gown", label: "✨ Gown" },
+            { key: "set", label: "👚 Set" },
+            { key: "cape", label: "🦇 Cape" }
+        ];
+
+        const skins = ["#f6d2c9", "#e9bda8", "#d9a57f", "#c98f6a"];
+        const hairs = ["#2a1b14", "#3a2a1d", "#5a3a25", "#1a1a1a", "#7a532f", "#caa56a"];
+
+        const state = {
+            mode: null,
+            garment: "dress",
+            fabricIdx: 0,
+            skinIdx: 0,
+            hairIdx: 0,
+            stickers: [],
+            dragId: null,
+            dragOffX: 0, dragOffY: 0,
+            spark: 0,
+            savedOnce: false,
+            unlocked: false
+        };
+
+        // UI: mode chips
+        const modeChips = document.getElementById("modeChips");
+        MODES.forEach(m => {
+            const c = document.createElement("div");
+            c.className = "chip";
+            c.textContent = m.label;
+            c.addEventListener("click", () => {
+                state.mode = m.key;
+                [...modeChips.children].forEach(x => x.classList.toggle("active", x === c));
+                beep(980, 0.06, "sine", 0.03);
+                toast(m.key === "kuromi" ? "😈 مود كرومي اشتغل" : "👑 مود الأميرات اشتغل");
+                draw(); updateProgress();
+            });
+            modeChips.appendChild(c);
+        });
+
+        // UI: garment chips
+        const garmentChips = document.getElementById("garmentChips");
+        garments.forEach(g => {
+            const c = document.createElement("div");
+            c.className = "chip" + (g.key === state.garment ? " active" : "");
+            c.textContent = g.label;
+            c.addEventListener("click", () => {
+                state.garment = g.key;
+                [...garmentChips.children].forEach(x => x.classList.toggle("active", x === c));
+                beep(740, 0.06, "triangle", 0.03);
+                draw(); updateProgress();
+            });
+            garmentChips.appendChild(c);
+        });
+
+        // UI: swatches
+        const swEl = document.getElementById("swatches");
+        function previewCSS(f) {
+            if (f.type === "solid") return f.c;
+            if (f.type === "polka") return `radial-gradient(circle at 25% 35%, rgba(255,255,255,.65) 0 3px, transparent 4px),
+                               radial-gradient(circle at 70% 60%, rgba(255,255,255,.55) 0 2px, transparent 3px),
+                               ${f.c}`;
+            if (f.type === "stars") return `radial-gradient(circle at 25% 30%, rgba(255,255,255,.85) 0 2px, transparent 3px),
+                               radial-gradient(circle at 60% 55%, rgba(255,255,255,.75) 0 2px, transparent 3px),
+                               radial-gradient(circle at 80% 25%, rgba(255,255,255,.70) 0 1.5px, transparent 2.5px),
+                               ${f.c}`;
+            if (f.type === "hearts") return `linear-gradient(135deg, rgba(255,255,255,.20), transparent), ${f.c}`;
+            if (f.type === "stripes") return `repeating-linear-gradient(45deg, rgba(0,0,0,.00) 0 6px, rgba(0,0,0,.18) 6px 10px), ${f.c}`;
+            if (f.type === "sparkle") return `radial-gradient(circle at 20% 30%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+                                 radial-gradient(circle at 70% 60%, rgba(255,255,255,.8) 0 2px, transparent 3px),
+                                 radial-gradient(circle at 55% 25%, rgba(255,255,255,.7) 0 1.5px, transparent 2.5px),
+                                 rgba(255,63,166,.55)`;
+            if (f.type === "denim") return `linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.18)), ${f.c}`;
+            return f.c;
+        }
+        function renderSwatches() {
+            swEl.innerHTML = "";
+            fabrics.forEach((f, i) => {
+                const s = document.createElement("div");
+                s.className = "swatch" + (i === state.fabricIdx ? " selected" : "");
+                s.title = f.name;
+                s.style.background = previewCSS(f);
+                s.addEventListener("click", () => {
+                    state.fabricIdx = i;
+                    beep(880, 0.06, "triangle", 0.02);
+                    renderSwatches(); draw(); updateProgress();
+                });
+                swEl.appendChild(s);
+            });
+        }
+        renderSwatches();
+
+        // Stickers
+        document.querySelectorAll("[data-stk]").forEach(b => {
+            b.addEventListener("click", () => {
+                const emoji = b.getAttribute("data-stk");
+                state.stickers.push({ emoji, x: 450, y: 620, size: 62 });
+                beep(1200, 0.05, "sine", 0.025);
+                sparkleFx();
+                draw(); updateProgress();
+                toast("✨ اسحبي الستكر لمكانه");
+            });
+        });
+
+        // Quick controls
+        document.getElementById("skinBtn").addEventListener("click", () => {
+            state.skinIdx = (state.skinIdx + 1) % skins.length;
+            beep(520, 0.06, "sine", 0.03);
+            draw();
+        });
+        document.getElementById("hairBtn").addEventListener("click", () => {
+            state.hairIdx = (state.hairIdx + 1) % hairs.length;
+            beep(420, 0.06, "sine", 0.03);
+            draw();
+        });
+        document.getElementById("sparkBtn").addEventListener("click", () => {
+            state.spark = 1;
+            firework();
+            beep(1400, 0.06, "triangle", 0.02);
+            setTimeout(() => { state.spark = 0; draw(); }, 650);
+        });
+
+        // Reset
+        document.getElementById("resetBtn").addEventListener("click", () => {
+            state.mode = null;
+            state.garment = "dress";
+            state.fabricIdx = 0;
+            state.skinIdx = 0;
+            state.hairIdx = 0;
+            state.stickers = [];
+            state.dragId = null;
+            state.savedOnce = false;
+            state.unlocked = false;
+            [...modeChips.children].forEach(x => x.classList.remove("active"));
+            [...garmentChips.children].forEach((x, i) => x.classList.toggle("active", garments[i].key === state.garment));
+            renderSwatches();
+            beep(300, 0.08, "sine", 0.03);
+            toast("♻️ رجعنا من الأول… شدّي حيلك 😈");
+            draw(); updateProgress();
+            document.getElementById("afterUnlockBox").classList.remove("show");
+        });
+
+        // Drag logic
+        function getPos(e) {
+            const r = canvas.getBoundingClientRect();
+            const x = (e.clientX - r.left) * (canvas.width / r.width);
+            const y = (e.clientY - r.top) * (canvas.height / r.height);
+            return { x, y };
+        }
+        function hitSticker(mx, my) {
+            for (let i = state.stickers.length - 1; i >= 0; i--) {
+                const s = state.stickers[i];
+                if (Math.hypot(mx - s.x, my - s.y) < s.size * 0.55) return i;
+            }
+            return null;
+        }
+        canvas.addEventListener("pointerdown", (e) => {
+            canvas.setPointerCapture(e.pointerId);
+            const { x, y } = getPos(e);
+            const id = hitSticker(x, y);
+            if (id !== null) {
+                const s = state.stickers[id];
+                state.dragOffX = x - s.x; state.dragOffY = y - s.y;
+                const moved = state.stickers.splice(id, 1)[0];
+                state.stickers.push(moved);
+                state.dragId = state.stickers.length - 1;
+                beep(880, 0.03, "sine", 0.02);
+                draw();
+            }
+        });
+        canvas.addEventListener("pointermove", (e) => {
+            if (state.dragId === null) return;
+            const { x, y } = getPos(e);
+            const s = state.stickers[state.dragId];
+            s.x = x - state.dragOffX; s.y = y - state.dragOffY;
+            draw();
+        });
+        canvas.addEventListener("pointerup", () => state.dragId = null);
+        canvas.addEventListener("dblclick", (e) => {
+            const { x, y } = getPos(e);
+            const id = hitSticker(x, y);
+            if (id !== null) {
+                state.stickers.splice(id, 1);
+                beep(220, 0.06, "sine", 0.03);
+                draw(); updateProgress();
+                toast("🗑️ انحذف الستكر");
+            }
+        });
+
+        // Save PNG
+        document.getElementById("saveBtn").addEventListener("click", () => {
+            if (!state.mode) {
+                toast("لاا… أول شي اختاري مود 😈👑");
+                beep(220, 0.09, "sine", 0.03);
+                return;
+            }
+            if (state.stickers.length < 1) {
+                toast("حطي ستكر واحد عالأقل 😭✨");
+                beep(220, 0.09, "sine", 0.03);
+                return;
+            }
+
+            state.savedOnce = true;
+            updateProgress();
+            firework();
+            beep(980, 0.07, "triangle", 0.02);
+
+            const a = document.createElement("a");
+            a.download = `Haya_Design_${MID}.png`;
+            a.href = canvas.toDataURL("image/png");
+            a.click();
+            toast("📸 انحفظ! إذا حطيتي 3 ستكرز… بتنفتح الخزنة 😉");
+        });
+
+        /* =========================
+           Progress / Vault logic
+        ========================= */
+        const bar = document.getElementById("bar");
+        const rulesChip = document.getElementById("rulesChip");
+        const vaultBtn = document.getElementById("vaultBtn");
+
+        function updateProgress() {
+            const hasMode = !!state.mode;
+            const hasStickers = state.stickers.length >= 3;
+            const hasSaved = state.savedOnce;
+
+            let p = 0;
+            if (hasMode) p += 33;
+            if (hasStickers) p += 33;
+            if (hasSaved) p += 34;
+
+            bar.style.width = p + "%";
+
+            const ok = hasMode && hasStickers && hasSaved;
+            rulesChip.textContent = ok ? "UNLOCKED ✅" : "LOCKED 🔒";
+
+            vaultBtn.classList.toggle("locked", !ok);
+            vaultBtn.disabled = !ok;
+
+            if (ok && !state.unlocked) {
+                toast("🔥 جاهزة تفتحي الخزنة! اضغطي عليها");
+                beep(1200, 0.06, "triangle", 0.02);
+            }
+        }
+
+        /* =========================
+           Vault Modal
+        ========================= */
+        const modal = document.getElementById("modal");
+        const closeModal = document.getElementById("closeModal");
+        const codeInput = document.getElementById("codeInput");
+        const checkBtn = document.getElementById("checkBtn");
+        const hintBtn = document.getElementById("hintBtn");
+        const secretBox = document.getElementById("secretBox");
+        const openGiftRow = document.getElementById("openGiftRow");
+        const openGiftBtn = document.getElementById("openGiftBtn");
+
+        vaultBtn.addEventListener("click", () => {
+            modal.classList.add("show");
+            codeInput.value = "";
+            secretBox.style.display = "none";
+            openGiftRow.style.display = "none";
+            setTimeout(() => codeInput.focus(), 150);
+            beep(660, 0.06, "sine", 0.02);
+        });
+        closeModal.addEventListener("click", () => modal.classList.remove("show"));
+        modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("show"); });
+
+        hintBtn.addEventListener("click", () => {
+            toast("💡 اسألي أخوك عن الورقة… هو معه الكود 😉");
+            beep(520, 0.06, "sine", 0.02);
+        });
+
+        checkBtn.addEventListener("click", () => {
+            const val = (codeInput.value || "").trim().toUpperCase();
+            if (val === SECRET_CODE.toUpperCase()) {
+                state.unlocked = true;
+
+                secretBox.textContent = SECRET_MESSAGE;
+                secretBox.style.display = "block";
+                openGiftRow.style.display = "flex";
+
+                firework(); firework();
+                beep(1200, 0.06, "triangle", 0.02);
+                beep(1500, 0.05, "sine", 0.02);
+
+                toast("✅ مبرووك… الخزنة انفتحت! 💖");
+            } else {
+                toast("❌ الكود غلط… جرّبي مرة تانية");
+                beep(220, 0.09, "sine", 0.03);
+            }
+        });
+
+        openGiftBtn.addEventListener("click", () => {
+            modal.classList.remove("show");
+            firework();
+            toast("🎁 هلق افتحي الهدية… وبعدها في مفاجأة تانية عاليمين 😉");
+
+            // show AFTER unlock box (phase 2)
+            const box = document.getElementById("afterUnlockBox");
+            box.classList.add("show");
+        });
+
+        /* =========================
+           Phase 2: video + whatsapp
+        ========================= */
+        const openVideoBtn = document.getElementById("openVideoBtn");
+        const waBtn = document.getElementById("waBtn");
+        const waNote = document.getElementById("waNote");
+
+        openVideoBtn.addEventListener("click", () => {
+            if (!VIDEO_URL || !VIDEO_URL.trim()) {
+                toast("⚠️ ما في رابط فيديو متحطوط… خليه أخوك يقلّك يبعتلي 😄");
+                return;
+            }
+            window.open(VIDEO_URL, "_blank", "noopener,noreferrer");
+        });
+
+        waBtn.addEventListener("click", () => {
+            if (!WHATSAPP_NUMBER || !WHATSAPP_NUMBER.trim()) {
+                toast("⚠️ ما في رقم واتساب متحطوط…");
+                return;
+            }
+            const msg =
+                `يا هيا! 😈👑
+أنا جاهز… دقّيلك فيديو هلق؟
+(ابعتيلي “جاهزة” وبنعمل Video Call)`;
+
+            const url = `https://wa.me/${encodeURIComponent(WHATSAPP_NUMBER)}?text=${encodeURIComponent(msg)}`;
+            waNote.style.display = "block";
+            waNote.textContent = "رح يفتح واتساب شات… اكتبي “جاهزة” وبعدين دقي فيديو 😉";
+            window.open(url, "_blank", "noopener,noreferrer");
+        });
+
+        /* =========================
+           Drawing
+        ========================= */
+        function makeFabricFill(f) {
+            if (f.type === "solid") return f.c;
+
+            const p = document.createElement("canvas");
+            p.width = 120; p.height = 120;
+            const pctx = p.getContext("2d");
+            pctx.fillStyle = f.c; pctx.fillRect(0, 0, 120, 120);
+
+            if (f.type === "polka") {
+                pctx.fillStyle = "rgba(255,255,255,.75)";
+                for (let i = 0; i < 20; i++) {
+                    const x = Math.random() * 120, y = Math.random() * 120, r = 2 + Math.random() * 6;
+                    pctx.beginPath(); pctx.arc(x, y, r, 0, Math.PI * 2); pctx.fill();
+                }
+            }
+            if (f.type === "stars") {
+                pctx.fillStyle = "rgba(255,255,255,.85)";
+                for (let i = 0; i < 14; i++) {
+                    const x = Math.random() * 120, y = Math.random() * 120;
+                    pctx.fillRect(x, y, 2.5, 2.5);
+                    pctx.fillRect(x + 4, y + 4, 1.8, 1.8);
+                }
+            }
+            if (f.type === "hearts") {
+                pctx.font = '34px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+                pctx.textAlign = "center"; pctx.textBaseline = "middle";
+                pctx.globalAlpha = 0.45;
+                for (let y = 20; y < 120; y += 40) {
+                    for (let x = 20; x < 120; x += 40) {
+                        pctx.fillText("💖", x, y);
+                    }
+                }
+                pctx.globalAlpha = 1;
+            }
+            if (f.type === "stripes") {
+                pctx.fillStyle = "rgba(0,0,0,.18)";
+                for (let x = -40; x < 160; x += 18) {
+                    pctx.save();
+                    pctx.translate(x, 0);
+                    pctx.rotate(Math.PI / 4);
+                    pctx.fillRect(0, 0, 10, 220);
+                    pctx.restore();
+                }
+            }
+            if (f.type === "sparkle") {
+                pctx.fillStyle = "rgba(255,255,255,.85)";
+                for (let i = 0; i < 30; i++) {
+                    const x = Math.random() * 120, y = Math.random() * 120;
+                    pctx.beginPath(); pctx.arc(x, y, 1.4 + Math.random() * 1.2, 0, Math.PI * 2); pctx.fill();
+                }
+            }
+            if (f.type === "denim") {
+                pctx.fillStyle = "rgba(255,255,255,.10)";
+                for (let y = 0; y < 120; y += 6) { pctx.fillRect(0, y, 120, 1); }
+                pctx.fillStyle = "rgba(0,0,0,.12)";
+                for (let x = 0; x < 120; x += 10) { pctx.fillRect(x, 0, 1, 120); }
+            }
+            return ctx.createPattern(p, "repeat");
+        }
+        function rr(x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.roundRect(x, y, w, h, r);
+        }
+        function fillRR(x, y, w, h, r, fill) {
+            ctx.save();
+            rr(x, y, w, h, r);
+            ctx.fillStyle = fill;
+            ctx.fill();
+            ctx.restore();
+        }
+        function circle(x, y, r, fill, alpha = 1) {
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fillStyle = fill; ctx.fill();
+            ctx.restore();
+        }
+
+        // “Kuromi-ish” doodle (بدون أصول/صور)
+        function drawKuromiDoodle(x, y, scale = 1) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(scale, scale);
+
+            // head base
+            circle(0, 10, 46, "rgba(255,255,255,.95)");
+            // hood
+            ctx.fillStyle = "#0d0d16";
+            ctx.beginPath();
+            ctx.arc(0, 10, 54, Math.PI * 1.05, Math.PI * 1.95);
+            ctx.quadraticCurveTo(58, 20, 42, 58);
+            ctx.quadraticCurveTo(0, 78, -42, 58);
+            ctx.quadraticCurveTo(-58, 20, 0, -44);
+            ctx.fill();
+
+            // ears
+            ctx.fillStyle = "#12121f";
+            ctx.beginPath();
+            ctx.moveTo(-30, -20);
+            ctx.quadraticCurveTo(-70, -85, -22, -96);
+            ctx.quadraticCurveTo(-8, -72, -18, -22);
+            ctx.closePath(); ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(30, -20);
+            ctx.quadraticCurveTo(70, -85, 22, -96);
+            ctx.quadraticCurveTo(8, -72, 18, -22);
+            ctx.closePath(); ctx.fill();
+
+            // face
+            circle(0, 18, 38, "rgba(255,255,255,.95)");
+            circle(-14, 14, 5, "#101019");
+            circle(14, 14, 5, "#101019");
+            ctx.strokeStyle = "#101019"; ctx.lineWidth = 3; ctx.lineCap = "round";
+            ctx.beginPath(); ctx.moveTo(-8, 32); ctx.quadraticCurveTo(0, 38, 8, 32); ctx.stroke();
+
+            // pink skull-bow vibe
+            circle(0, -12, 10, "#ff3fa6");
+            circle(-10, -12, 6, "#ff3fa6");
+            circle(10, -12, 6, "#ff3fa6");
+            ctx.fillStyle = "rgba(255,255,255,.75)";
+            ctx.fillRect(-3, -15, 2, 2);
+            ctx.fillRect(1, -15, 2, 2);
+
+            ctx.restore();
+        }
+
+        function drawGarment(kind, fabric) {
+            const fill = makeFabricFill(fabric);
+            const isK = (state.mode === "kuromi");
+            ctx.save();
+            ctx.shadowColor = "rgba(0,0,0,.25)";
+            ctx.shadowBlur = 18;
+
+            if (kind === "dress") {
+                ctx.fillStyle = fill;
+                rr(350, 360, 200, 220, 44); ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(350, 545);
+                ctx.quadraticCurveTo(450, 615, 550, 545);
+                ctx.lineTo(605, 900);
+                ctx.quadraticCurveTo(450, 980, 295, 900);
+                ctx.closePath();
+                ctx.fill();
+
+                // belt accent
+                ctx.fillStyle = isK ? "rgba(255,63,166,.55)" : "rgba(255,211,107,.55)";
+                rr(335, 535, 230, 22, 12); ctx.fill();
+            }
+
+            if (kind === "gown") {
+                ctx.fillStyle = fill;
+                rr(343, 350, 214, 260, 52); ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(343, 610);
+                ctx.quadraticCurveTo(450, 710, 557, 610);
+                ctx.lineTo(640, 1000);
+                ctx.quadraticCurveTo(450, 1080, 260, 1000);
+                ctx.closePath(); ctx.fill();
+
+                // shine stripe
+                ctx.globalAlpha = 0.18;
+                ctx.fillStyle = "#fff";
+                ctx.beginPath();
+                ctx.moveTo(395, 385);
+                ctx.quadraticCurveTo(470, 585, 405, 920);
+                ctx.quadraticCurveTo(372, 1040, 350, 980);
+                ctx.quadraticCurveTo(410, 640, 370, 390);
+                ctx.closePath(); ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+
+            if (kind === "set") {
+                ctx.fillStyle = fill;
+                rr(355, 370, 190, 190, 46); ctx.fill();
+
+                const alt = makeFabricFill({ ...fabric, type: isK ? "stars" : "hearts", c: fabric.c });
+                ctx.fillStyle = alt;
+                ctx.beginPath();
+                ctx.moveTo(335, 560);
+                ctx.quadraticCurveTo(450, 640, 565, 560);
+                ctx.lineTo(600, 860);
+                ctx.quadraticCurveTo(450, 930, 300, 860);
+                ctx.closePath(); ctx.fill();
+
+                ctx.globalAlpha = .95;
+                ctx.font = '64px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+                ctx.textAlign = "center";
+                ctx.fillText(isK ? "🖤" : "🎀", 450, 560);
+                ctx.globalAlpha = 1;
+            }
+
+            if (kind === "cape") {
+                const under = makeFabricFill({ type: "solid", c: isK ? "#ff3fa6" : "#ffd36b" });
+                ctx.fillStyle = under;
+                rr(350, 380, 200, 240, 46); ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(350, 600);
+                ctx.quadraticCurveTo(450, 670, 550, 600);
+                ctx.lineTo(590, 850);
+                ctx.quadraticCurveTo(450, 920, 310, 850);
+                ctx.closePath(); ctx.fill();
+
+                ctx.fillStyle = fill;
+                ctx.globalAlpha = 0.96;
+                ctx.beginPath();
+                ctx.moveTo(335, 410);
+                ctx.quadraticCurveTo(450, 500, 565, 410);
+                ctx.quadraticCurveTo(720, 560, 650, 890);
+                ctx.quadraticCurveTo(450, 990, 250, 890);
+                ctx.quadraticCurveTo(180, 560, 335, 410);
+                ctx.closePath(); ctx.fill();
+                ctx.globalAlpha = 1;
+
+                ctx.fillStyle = "rgba(255,255,255,.55)";
+                circle(420, 430, 12, ctx.fillStyle);
+                circle(480, 430, 12, ctx.fillStyle);
+            }
+
+            // outline
+            ctx.shadowBlur = 0;
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "rgba(0,0,0,.18)";
+            ctx.beginPath();
+            ctx.roundRect(343, 350, 214, 260, 52);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // canvas background glow
+            ctx.save();
+            const g = ctx.createRadialGradient(450, 240, 40, 450, 260, 700);
+            g.addColorStop(0, "rgba(255,255,255,.18)");
+            g.addColorStop(1, "rgba(255,255,255,0)");
+            ctx.fillStyle = g;
+            ctx.beginPath(); ctx.arc(450, 280, 760, 0, Math.PI * 2); ctx.fill();
+            ctx.restore();
+
+            // floor shadow
+            ctx.save();
+            ctx.fillStyle = "rgba(0,0,0,.25)";
+            ctx.beginPath(); ctx.ellipse(450, 965, 190, 42, 0, 0, Math.PI * 2); ctx.fill();
+            ctx.restore();
+
+            // mannequin
+            const skin = skins[state.skinIdx];
+            const hair = hairs[state.hairIdx];
+
+            const isK = state.mode === "kuromi";
+            const halo = isK ? "rgba(255,63,166,.18)" : "rgba(255,211,107,.16)";
+            circle(450, 230, 92, halo);
+
+            // head
+            circle(450, 230, 64, skin);
+
+            // hair
+            ctx.save();
+            ctx.fillStyle = hair;
+            ctx.globalAlpha = .95;
+            ctx.beginPath();
+            ctx.arc(450, 215, 68, Math.PI * 1.05, Math.PI * 1.95);
+            ctx.quadraticCurveTo(520, 205, 515, 250);
+            ctx.quadraticCurveTo(485, 220, 450, 228);
+            ctx.quadraticCurveTo(415, 220, 385, 250);
+            ctx.quadraticCurveTo(380, 205, 450, 200);
+            ctx.closePath(); ctx.fill();
+            ctx.restore();
+
+            // neck + torso + arms + legs
+            fillRR(410, 285, 80, 78, 18, skin);
+            fillRR(345, 330, 210, 290, 44, skin);
+            fillRR(270, 350, 78, 260, 34, skin);
+            fillRR(552, 350, 78, 260, 34, skin);
+            fillRR(365, 620, 90, 300, 34, skin);
+            fillRR(445, 620, 90, 300, 34, skin);
+
+            // garment
+            drawGarment(state.garment, fabrics[state.fabricIdx]);
+
+            // emblem stamp
+            ctx.save();
+            ctx.globalAlpha = 0.95;
+            if (isK) {
+                drawKuromiDoodle(720, 180, 0.88);
+                ctx.font = '900 18px ui-monospace,Menlo,Consolas,monospace';
+                ctx.fillStyle = "rgba(255,255,255,.85)";
+                ctx.textAlign = "center";
+                ctx.fillText("KUROMI MODE", 720, 265);
+            } else {
+                ctx.font = '900 72px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+                ctx.textAlign = "center";
+                ctx.fillText("👑", 720, 200);
+                ctx.font = '900 18px ui-monospace,Menlo,Consolas,monospace';
+                ctx.fillStyle = "rgba(255,255,255,.85)";
+                ctx.fillText("PRINCESS MODE", 720, 265);
+            }
+            ctx.restore();
+
+            // stickers
+            state.stickers.forEach(s => {
+                ctx.save();
+                ctx.font = `${s.size}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+                ctx.textAlign = "center"; ctx.textBaseline = "middle";
+                ctx.shadowColor = "rgba(0,0,0,.35)";
+                ctx.shadowBlur = 16;
+                ctx.fillText(s.emoji, s.x, s.y);
+                ctx.restore();
+            });
+
+            // signature
+            ctx.save();
+            ctx.textAlign = "center";
+            ctx.fillStyle = "rgba(255,255,255,.92)";
+            ctx.font = '1000 30px system-ui,Segoe UI,Arial';
+            ctx.fillText(FULL_NAME, 450, 84);
+            ctx.fillStyle = "rgba(255,255,255,.65)";
+            ctx.font = '900 16px ui-monospace,Menlo,Consolas,monospace';
+            ctx.fillText(`${MID}`, 450, 114);
+            ctx.restore();
+
+            if (state.spark) {
+                ctx.save();
+                ctx.globalAlpha = 0.6;
+                ctx.font = '72px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+                ctx.textAlign = "center";
+                ctx.fillText("✨", 210, 220);
+                ctx.fillText("✨", 690, 320);
+                ctx.fillText("✨", 230, 720);
+                ctx.fillText("✨", 680, 780);
+                ctx.restore();
+            }
+        }
+
+        // initial
+        updateProgress();
+        draw();
+    </script>
+</body>
+
+</html>
